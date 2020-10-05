@@ -1,26 +1,34 @@
-import React from 'react';
+import React from "react";
 
-import { action } from '@storybook/addon-actions';
-import {Button} from '@material-ui/core/';
+import { action } from "@storybook/addon-actions";
+import { Button } from "@material-ui/core/";
 
 export default {
-  title: 'Material Button',
+  title: "Material Button",
 };
 
 export const Default = () => (
-  <Button onClick={action('Default button clicked')} variant="contained">
+  <Button onClick={action("Default button clicked")} variant="contained">
     Default
   </Button>
 );
 
 export const Primary = () => (
-  <Button color="primary" onClick={action('Primary button clicked')} variant="contained">
+  <Button
+    color="primary"
+    onClick={action("Primary button clicked")}
+    variant="contained"
+  >
     Primary
   </Button>
 );
 
 export const Secondary = () => (
-  <Button color="secondary" onClick={action('Secondary button clicked')} variant="contained">
+  <Button
+    color="secondary"
+    onClick={action("Secondary button clicked")}
+    variant="contained"
+  >
     Secondary
   </Button>
 );
