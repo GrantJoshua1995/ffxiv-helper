@@ -47,6 +47,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 * React
 * Redux
  * Redux-Toolkit
+ * Redux-Saga
 * TypeScript
 * Storybook
 * Material-UI
