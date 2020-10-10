@@ -26,19 +26,21 @@ const Select: React.FC<SelectProps> = ({
   handleChange,
   options,
   placeholder,
-}) => (
-  <FormControl>
-    {placeholder && <InputLabel>{placeholder}</InputLabel>}
-    <MaterialSelect value={value} onChange={handleChange}>
-      {options.map((option) => {
-        return (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        );
-      })}
-    </MaterialSelect>
-  </FormControl>
-);
+}) => {
+  return (
+    <FormControl>
+      {placeholder && <InputLabel>{placeholder}</InputLabel>}
+      <MaterialSelect value={value} onChange={handleChange}>
+        {options.map((option) => {
+          return (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          );
+        })}
+      </MaterialSelect>
+    </FormControl>
+  );
+};
 
 export default Select;

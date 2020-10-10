@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import Select from "./components/Select";
+import { FFXIVApi } from "./services/api";
 
 function App() {
+  const [servers, setServers] = useState<{ value: string; label: string }[]>(
+    []
+  );
+  const [selectedServer, setSelectedServer] = useState<unknown>("");
+  useEffect(() => {
+    FFXIVApi.serverFetch().then((serversResponse) => {
+      serversResponse.forEach((serverResponse: string) => {
+        setServers((servers) => [
+          ...servers,
+          { label: serverResponse, value: serverResponse },
+        ]);
+      });
+    });
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<{ value: unknown }>) => {
+    setSelectedServer(e.target.value);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Select
+        value={selectedServer}
+        placeholder="Server"
+        handleChange={handleChange}
+        options={servers}
+      />
     </div>
   );
 }
