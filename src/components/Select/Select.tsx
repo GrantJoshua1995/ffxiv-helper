@@ -17,6 +17,7 @@ interface SelectProps {
     child: React.ReactNode
   ) => void;
   placeholder?: string;
+  name?: string;
   // TODO: type this better in future
   options: { value: string; label: string }[];
 }
@@ -25,12 +26,13 @@ const Select: React.FC<SelectProps> = ({
   value,
   handleChange,
   options,
+  name,
   placeholder,
 }) => {
   return (
     <FormControl>
       {placeholder && <InputLabel>{placeholder}</InputLabel>}
-      <MaterialSelect value={value} onChange={handleChange}>
+      <MaterialSelect name={name} value={value} onChange={handleChange}>
         {options.map((option) => {
           return (
             <MenuItem key={option.value} value={option.value}>
