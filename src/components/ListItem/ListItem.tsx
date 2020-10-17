@@ -9,11 +9,19 @@ import {
 interface ListItemProps {
   imageUrl: string;
   header: string;
+  button?: boolean;
+  onClick?: () => void;
 }
 
-const ListItem: React.SFC<ListItemProps> = ({ imageUrl, header }) => {
+const ListItem: React.SFC<ListItemProps> = ({
+  imageUrl,
+  header,
+  button,
+  onClick,
+}) => {
   return (
-    <ListItemMaterial>
+    // @ts-ignore
+    <ListItemMaterial button={button} onClick={onClick}>
       <ListItemAvatar>
         <Avatar src={imageUrl} />
       </ListItemAvatar>

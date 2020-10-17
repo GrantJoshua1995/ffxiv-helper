@@ -1,7 +1,8 @@
-import { Button, TextField } from "@material-ui/core";
+import { Button, List, TextField } from "@material-ui/core";
 import { Formik } from "formik";
 import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
+import ListItem from "./components/ListItem";
 import Select from "./components/Select";
 import { FFXIVApi } from "./services/api";
 
@@ -9,6 +10,9 @@ function App() {
   const [servers, setServers] = useState<string[]>([]);
   const [formattedServers, setFormattedServers] = useState<
     { label: string; value: string }[]
+  >([]);
+  const [characterList, setCharacterList] = useState<
+    { Avatar: string; Name: string }[]
   >([]);
 
   useEffect(() => {
@@ -34,7 +38,7 @@ function App() {
         name: values.characterName,
         server: values.server,
       });
-      console.log(characterResponse);
+      setCharacterList(characterResponse.Results);
     },
     []
   );
@@ -66,6 +70,15 @@ function App() {
           </form>
         )}
       </Formik>
+      {characterList.length > 0 && (
+        <List>
+          {characterList.map((character) => {
+            return (
+              <ListItem imageUrl={character.Avatar} header={character.Name} />
+            );
+          })}
+        </List>
+      )}
     </div>
   );
 }
