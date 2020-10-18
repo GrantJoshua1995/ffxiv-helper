@@ -1,6 +1,7 @@
 import { Button, List, TextField } from "@material-ui/core";
 import { Formik } from "formik";
 import React, { useCallback, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import ListItem from "../../components/ListItem";
 import Select from "../../components/Select";
 import { FFXIVApi } from "../../services/api";
@@ -11,7 +12,7 @@ const CharacterSearch = () => {
     { label: string; value: string }[]
   >([]);
   const [characterList, setCharacterList] = useState<
-    { Avatar: string; Name: string }[]
+    { Avatar: string; Name: string; ID: string }[]
   >([]);
 
   useEffect(() => {
@@ -41,6 +42,8 @@ const CharacterSearch = () => {
     },
     []
   );
+
+  const history = useHistory();
   return (
     <>
       <Formik
@@ -72,7 +75,12 @@ const CharacterSearch = () => {
         <List>
           {characterList.map((character) => {
             return (
-              <ListItem imageUrl={character.Avatar} header={character.Name} />
+              <ListItem
+                onClick={() => history.push(`/characters/${character.ID}`)}
+                button={true}
+                imageUrl={character.Avatar}
+                header={character.Name}
+              />
             );
           })}
         </List>

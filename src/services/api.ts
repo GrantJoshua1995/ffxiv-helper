@@ -22,6 +22,12 @@ class ApiClient {
 
     return characterResponse.data;
   }
+
+  async fetchCharacterDetails(lodestoneID: string) : Promise<any> {
+    const characterDetailsResponse = await this.client.get(`/character/${lodestoneID}`)
+
+    return characterDetailsResponse.data;
+  }
 }
 
 interface fetchCharacterRequest {
