@@ -1,13 +1,15 @@
 import { Button, List, TextField } from "@material-ui/core";
 import { Formik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
 import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import ListItem from "../../components/ListItem";
 import Select from "../../components/Select";
 import { FFXIVApi } from "../../services/api";
-
+import { fetchServersStart, fetchServersSuccess } from "../../store/servers";
 const CharacterSearch = () => {
-  const [servers, setServers] = useState<string[]>([]);
+  const dispatch = useDispatch();
+  const servers = useSelector((state: { servers: string[] }) => state.servers);
   const [formattedServers, setFormattedServers] = useState<
     { label: string; value: string }[]
   >([]);
@@ -15,11 +17,15 @@ const CharacterSearch = () => {
     { Avatar: string; Name: string; ID: string }[]
   >([]);
 
+  const fetchServerList = useCallback(async () => {
+    dispatch(fetchServersStart());
+    const serverList = await FFXIVApi.fetchServerList();
+    dispatch(fetchServersSuccess(serverList));
+  }, [dispatch]);
+
   useEffect(() => {
-    FFXIVApi.fetchServerList().then((serverList) => {
-      setServers(serverList);
-    });
-  }, []);
+    fetchServerList();
+  }, [fetchServerList]);
 
   useEffect(() => {
     // clear out duplicates
