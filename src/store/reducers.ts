@@ -1,5 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { serversSlice } from "./servers";
+import { serversSlice } from "./servers/servers.slice";
 
 const reducers = combineReducers({
   servers: serversSlice.reducer,

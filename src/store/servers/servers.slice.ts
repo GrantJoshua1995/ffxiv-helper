@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Servers } from "../types/servers";
+import { Servers } from "../../types/servers";
 
 const INITIAL_STATE: Servers = [];
 

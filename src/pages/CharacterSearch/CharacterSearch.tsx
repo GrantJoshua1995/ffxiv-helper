@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import ListItem from "../../components/ListItem";
 import Select from "../../components/Select";
 import { FFXIVApi } from "../../services/api";
-import { fetchServersStart, fetchServersSuccess } from "../../store/servers";
+import { fetchServersStart } from "../../store/servers/servers.slice";
 const CharacterSearch = () => {
   const dispatch = useDispatch();
   const servers = useSelector((state: { servers: string[] }) => state.servers);
@@ -19,8 +19,6 @@ const CharacterSearch = () => {
 
   const fetchServerList = useCallback(async () => {
     dispatch(fetchServersStart());
-    const serverList = await FFXIVApi.fetchServerList();
-    dispatch(fetchServersSuccess(serverList));
   }, [dispatch]);
 
   useEffect(() => {
